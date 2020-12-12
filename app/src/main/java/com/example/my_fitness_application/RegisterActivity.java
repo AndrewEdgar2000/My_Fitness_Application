@@ -31,6 +31,10 @@ public class RegisterActivity extends AppCompatActivity {
         eRegPassword = findViewById(R.id.etRegPassword);
         eConfirmRegPassword = findViewById(R.id.etConfirmRegPassword);
 
+        /*
+        A listener for the register button, this will add the username and password
+        to a Credentials object to be used to sign in to the app with
+         */
         eBtnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,10 +65,17 @@ public class RegisterActivity extends AppCompatActivity {
 
     //Validate function to make sure the
     private boolean validate(String username , String password, String confirmPassword){
+        /*Checking to see if the fields are empty, if they are the function will return false and
+          will display a message
+         */
         if(username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()){
             Toast.makeText(this, "Please enter all the details!", Toast.LENGTH_SHORT).show();
             return false;
         }
+        /*
+        Checking to see if the two password fields are the same, if not the function will return false
+        and will display a message.
+         */
         if(!password.equals(confirmPassword)){
             Toast.makeText(this, "The two passwords do not match!", Toast.LENGTH_SHORT).show();
             return false;
