@@ -12,17 +12,10 @@ import java.util.List;
 @Dao
 public interface CredentialsDAO {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public void insert(Credentials aCredentials);
+    @Insert
+    void insert(Credentials aCredentials);
 
-    @Update
-    public void update(Credentials aCredentials);
-
-
-    @Delete
-    public void delete(Credentials aCredentials);
-
-    @Query("SELECT * from Credentials where username LIKE :aUsername")
-    public List<Credentials> getCredentialsFor(String aUsername);
+    @Query("SELECT * from Credentials where uid=(:uid) and password=(:password)")
+    Credentials login(String uid, String password);
 
 }
