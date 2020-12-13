@@ -3,6 +3,7 @@ package com.example.my_fitness_application;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,9 @@ public class RegisterActivity extends AppCompatActivity {
     //Object for the credentials to be passed into
     public static Credentials credentials;
 
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor sharedPreferencesEditor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,10 @@ public class RegisterActivity extends AppCompatActivity {
         eRegUsername = findViewById(R.id.etRegUsername);
         eRegPassword = findViewById(R.id.etRegPassword);
         eConfirmRegPassword = findViewById(R.id.etConfirmRegPassword);
+
+        sharedPreferences = getApplicationContext().getSharedPreferences("CredentialsDB", MODE_PRIVATE);
+        sharedPreferencesEditor = sharedPreferences.edit();
+
 
         /*
         A listener for the register button, this will add the username and password
@@ -44,7 +52,13 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if(validate(regUsername, regPassword, regConfirmPassword)){
                     credentials = new Credentials(regUsername, regPassword);
-                    startActivity(new Intent(RegisterActivity.this, HomePageActivity.class));
+
+                    //Store the credentials to the shared preferences file
+                    sharedPreferencesEditor.putString("Username", regUsername);
+                    sharedPreferencesEditor.putString("Password", regPassword);
+                    sharedPreferencesEditor.apply();
+
+                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                     Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
                 }
             }
