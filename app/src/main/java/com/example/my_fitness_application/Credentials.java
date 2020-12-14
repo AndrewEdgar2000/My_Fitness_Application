@@ -1,6 +1,7 @@
 package com.example.my_fitness_application;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -9,14 +10,17 @@ public class Credentials {
 
     @NonNull
     @PrimaryKey(autoGenerate = true)
-    private int uid;
+    private Integer uid;
 
+    @ColumnInfo(name = "username")
     private String username;
+
+    @ColumnInfo(name = "password")
     private String password;
 
-    public Credentials(String aUsername, String aPassword){
-        this.username = aUsername;
-        this.password = aPassword;
+    public Credentials(String username, String password){
+        this.username = username;
+        this.password = password;
     }
 
     public String getUsername() {
@@ -35,11 +39,11 @@ public class Credentials {
         this.password = aPassword;
     }
 
-    public int getUid() {
+    public Integer getUid() {
         return uid;
     }
 
-    public void setUid(int uid) {
+    public void setUid(Integer uid) {
         this.uid = uid;
     }
 }

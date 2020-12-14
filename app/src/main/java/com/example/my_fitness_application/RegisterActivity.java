@@ -49,9 +49,18 @@ public class RegisterActivity extends AppCompatActivity {
                 String regUsername = eRegUsername.getText().toString();
                 String regPassword = eRegPassword.getText().toString();
                 String regConfirmPassword = eConfirmRegPassword.getText().toString();
+                credentials = new Credentials(regUsername, regPassword);
 
                 if(validate(regUsername, regPassword, regConfirmPassword)){
-                    credentials = new Credentials(regUsername, regPassword);
+                    UserDatabase userDatabase = UserDatabase.getDatabase(getApplicationContext());
+                    final CredentialsDAO credentialsDAO = userDatabase.credentialsDAO();
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            credentialsDAO.insert(credentials);
+                        }
+                    }).start();
+
 
                     //Store the credentials to the shared preferences file
                     sharedPreferencesEditor.putString("Username", regUsername);

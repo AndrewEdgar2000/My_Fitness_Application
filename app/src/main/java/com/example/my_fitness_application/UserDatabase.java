@@ -6,25 +6,20 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = (Credentials.class), version = 1)
+@Database(entities = {Credentials.class}, version = 1)
 public abstract class UserDatabase extends RoomDatabase {
 
-    public abstract CredentialsDAO credentialsDAO();
+    private static UserDatabase INSTANCE;
 
-    public static UserDatabase INSTANCE;
-
-    public static UserDatabase getDatabase(final Context context){
+    public static synchronized UserDatabase getDatabase(final Context context){
         if(INSTANCE == null){
-            synchronized (UserDatabase.class){
-                if(INSTANCE == null){
                     INSTANCE = Room.databaseBuilder(context, UserDatabase.class, "User_Database")
                             .fallbackToDestructiveMigration()
-                            .allowMainThreadQueries()
                             .build();
-                }
-            }
         }
         return INSTANCE;
     }
 
+
+    public abstract CredentialsDAO credentialsDAO();
 }

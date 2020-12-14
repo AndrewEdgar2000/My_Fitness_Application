@@ -13,9 +13,9 @@ import java.util.List;
 public interface CredentialsDAO {
 
     @Insert
-    void insert(Credentials aCredentials);
+    public void insert(Credentials aCredentials);
 
-    @Query("SELECT * from Credentials where uid=(:uid) and password=(:password)")
-    Credentials login(String uid, String password);
+    @Query("SELECT * from Credentials where username =(:username) and password=(:password)")
+    public Credentials login(String username, String password);
 
 }

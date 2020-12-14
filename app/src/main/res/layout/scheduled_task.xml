@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="#FFF">
+
+    <LinearLayout
+        android:layout_marginLeft="16dp"
+        android:orientation="vertical"
+        android:layout_width="220dp"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvTaskTitle"
+            android:layout_marginTop="19dp"
+            android:textSize="22dp"
+            android:text="Test Task"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvTaskDesc"
+            android:textSize="18dp"
+            android:textColor="#ADADAD"
+            android:layout_marginTop="8dp"
+            android:text="Test Description"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginLeft="75dp"
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+     <TextView
+         android:id="@+id/tvTaskDate"
+         android:textSize="18dp"
+         android:textColor="@color/colorPrimaryDark"
+         android:text="A Date"
+         android:gravity="center"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+</LinearLayout>

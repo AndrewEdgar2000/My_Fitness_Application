@@ -64,32 +64,40 @@ public class MainActivity extends AppCompatActivity {
 
         //On click listener to login in to the application
         eLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+              @Override
+              public void onClick(View v) {
 
-                String inputUsername = eUsername.getText().toString();
-                String inputPassword = ePassword.getText().toString();
+                  final String inputUsername = eUsername.getText().toString();
+                  final String inputPassword = ePassword.getText().toString();
 
-                if(inputUsername.isEmpty() || inputPassword.isEmpty()){
-                    Toast.makeText(MainActivity.this, "Please enter all the required details.", Toast.LENGTH_SHORT).show();
-                } else {
-                    isValid = validate(inputUsername, inputPassword);
-                    if(!isValid){
-                        count --;
-                        Toast.makeText(MainActivity.this, "Incorrect credentials entered!", Toast.LENGTH_SHORT).show();
-                        eNumAttempts.setText("Number of attempts remaining: " + count);
-                        if(count == 0){
-                            eLogin.setEnabled(false);
-                        }
-                    } else {
-                        Toast.makeText(MainActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                        //Add code to go to next activity
-                        Intent intent = new Intent(MainActivity.this, HomePageActivity.class);
-                        startActivity(intent);
-                    }
-                }
-            }
-        });
+                  if (inputUsername.isEmpty() || inputPassword.isEmpty()) {
+                      Toast.makeText(MainActivity.this, "Please enter all the required details.", Toast.LENGTH_SHORT).show();
+                  } else {
+                      UserDatabase userDatabase = UserDatabase.getDatabase(getApplicationContext());
+                      final CredentialsDAO credentialsDAO = userDatabase.credentialsDAO();
+                      new Thread(new Runnable() {
+                          @Override
+                          public void run() {
+                              Credentials credentials = credentialsDAO.login(inputUsername, inputPassword);
+                              if (credentials == null) {
+                                  runOnUiThread(new Runnable() {
+                                      @Override
+                                      public void run() {
+                                          eNumAttempts.setText("Number of attempts remaining: " + count--);
+                                          Toast.makeText(getApplicationContext(), "Invalid Credentials!", Toast.LENGTH_SHORT).show();
+                                      }
+                                  });
+                              } else {
+                                  String name = credentials.getUsername();
+                                  startActivity(new Intent(MainActivity.this, HomePageActivity.class)
+                                          .putExtra("name", name));
+                              }
+                          }
+                      }).start();
+                  }
+              }
+          });
+
 
         //On click listener to get to the registration page
         eSignUp.setOnClickListener(new View.OnClickListener() {
@@ -102,13 +110,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //Validate function checks if the credentials put into the login page are correct
-    private boolean validate(String uName, String uPassword) {
-        if(RegisterActivity.credentials != null) {
-            if (uName.equals(RegisterActivity.credentials.getUsername()) && uPassword.equals(RegisterActivity.credentials.getPassword())) {
-                return true;
-            }
-        }
-        return false;
-    }
 }
