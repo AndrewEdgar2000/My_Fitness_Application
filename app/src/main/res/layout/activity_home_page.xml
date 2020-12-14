@@ -16,7 +16,7 @@
         <TextView
             android:id="@+id/tvUserName"
             android:text=""
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:gravity="center"
             android:textColor="#4A4E6A"
             android:layout_marginTop="8dp"
@@ -25,9 +25,9 @@
 
         <TextView
             android:id="@+id/tvMySchedule"
-            android:textSize="32dp"
+            android:textSize="32sp"
             android:textColor="@android:color/white"
-            android:text="My Schedule"
+            android:text="@string/my_schedule"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:gravity="center"/>
@@ -52,8 +52,8 @@
 
     <TextView
         android:id="@+id/tvNoMoreTasks"
-        android:textSize="16dp"
-        android:text="No more tasks to do"
+        android:textSize="16sp"
+        android:text="@string/no_more_tasks_to_do"
         android:layout_marginTop="30dp"
         android:gravity="center"
         android:layout_width="fill_parent"

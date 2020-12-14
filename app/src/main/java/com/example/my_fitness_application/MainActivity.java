@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         //On click listener to login in to the application
         eLogin.setOnClickListener(new View.OnClickListener() {
               @Override
@@ -83,21 +82,25 @@ public class MainActivity extends AppCompatActivity {
                                   runOnUiThread(new Runnable() {
                                       @Override
                                       public void run() {
-                                          eNumAttempts.setText("Number of attempts remaining: " + count--);
+                                          count--;
+                                          eNumAttempts.setText("Number of attempts remaining: " + count);
                                           Toast.makeText(getApplicationContext(), "Invalid Credentials!", Toast.LENGTH_SHORT).show();
+                                          if(count ==0) {
+                                              eLogin.setEnabled(false);
+                                          }
                                       }
                                   });
                               } else {
+                                  String pass = credentials.getPassword();
                                   String name = credentials.getUsername();
                                   startActivity(new Intent(MainActivity.this, HomePageActivity.class)
-                                          .putExtra("name", name));
+                                          .putExtra("name", name).putExtra("pass", pass));
                               }
                           }
                       }).start();
                   }
               }
           });
-
 
         //On click listener to get to the registration page
         eSignUp.setOnClickListener(new View.OnClickListener() {

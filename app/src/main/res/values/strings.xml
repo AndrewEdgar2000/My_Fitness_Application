@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">My_Fitness_Application</string>
+    <string name="profile">Profile</string>
+    <string name="enter_username">Enter Username</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="number_of_attempts_remaining_5">Number of attempts remaining: 5</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="my_schedule">My Schedule</string>
+    <string name="no_more_tasks_to_do">No more tasks to do</string>
+    <string name="add_a_task">Add A Task</string>
+    <string name="enter_the_tasks_title">Enter the tasks title</string>
+    <string name="enter_the_tasks_description">Enter the tasks description</string>
+    <string name="enter_task_date_dd_mm_yyy">Enter task date (DD/MM/YYY)</string>
+    <string name="add">Add</string>
+    <string name="test_task">Test Task</string>
+    <string name="test_description">Test Description</string>
+    <string name="a_date">A Date</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="cancel">Cancel</string>
+    <string name="register">Register</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="number_of_attempts_remaining">Number of attempts remaining:</string>
 </resources>

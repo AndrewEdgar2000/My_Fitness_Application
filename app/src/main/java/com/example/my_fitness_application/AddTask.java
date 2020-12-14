@@ -23,9 +23,6 @@ public class AddTask extends AppCompatActivity {
     private EditText eTaskTitle, eTaskDate, eTaskDesc;
     private Button eAddNewTask, eCancelAddTask;
 
-    private RecyclerView recyclerView;
-    private ArrayList<ScheduledTasks> list;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,12 +44,21 @@ public class AddTask extends AppCompatActivity {
                 String taskTitle = eTaskTitle.getText().toString();
                 String taskDesc = eTaskDesc.getText().toString();
                 String taskDate = eTaskDate.getText().toString();
-                Toast.makeText(AddTask.this, "Task added successfully!", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(AddTask.this, HomePageActivity.class).putExtra("Title", taskTitle)
-                .putExtra("Desc", taskDesc).putExtra("Date", taskDate));
+
+                if(validate(taskTitle, taskDesc, taskDate)){
+                    Toast.makeText(AddTask.this, "Task added successfully!", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(AddTask.this, HomePageActivity.class).putExtra("Title", taskTitle)
+                            .putExtra("Desc", taskDesc).putExtra("Date", taskDate));
+                }
             }
         });
 
+        eProf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AddTask.this, ProfileActivity.class));
+            }
+        });
         eCancelAddTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,11 +68,18 @@ public class AddTask extends AppCompatActivity {
         eLog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AddTask.this, HomePageActivity.class));
+                startActivity(new Intent(AddTask.this, MainActivity.class));
             }
         });
 
-
-
     }
+
+    private boolean validate(String title, String desc, String date){
+        if(title.isEmpty() || desc.isEmpty() || date.isEmpty()){
+            Toast.makeText(this, "Please enter all fields", Toast.LENGTH_SHORT).show();
+            return  false;
+        }
+        return true;
+    }
+
 }

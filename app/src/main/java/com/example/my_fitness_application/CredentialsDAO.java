@@ -18,4 +18,6 @@ public interface CredentialsDAO {
     @Query("SELECT * from Credentials where username =(:username) and password=(:password)")
     public Credentials login(String username, String password);
 
+    @Query("UPDATE Credentials SET username = (:newUsername), password = (:newPassword)")
+    public void updateProfile(String newUsername, String newPassword);
 }
